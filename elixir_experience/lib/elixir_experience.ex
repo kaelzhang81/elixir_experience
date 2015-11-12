@@ -70,4 +70,23 @@ defmodule ElixirExperience do
         String.slice(bytes, 0..n-1)
     end
 
+
+    @doc """
+    Write a find_missing_char function that takes a same case alphabetical char list and returns the missing char if there is one otherwise returns nil, e.g:
+
+    find_missing_char('ZCGBMHFJYTODIUQARVEWPLNKX') #=> ?S
+    find_missing_char('abcdefghijklmnopqrstuvwxyz') #=> nil
+    """
+    def find_missing_char(char_list) do
+        [h|_t] = char_list
+        is_down = h > 96
+        input_string = char_list |> List.to_string |> String.downcase
+        output = 'abcdefghijklmnopqrstuvwxyz' |>  Enum.filter((&(not String.contains?(input_string, List.to_string([&1])))))
+        if output == [] do
+            nil
+        else
+            [h|_t] = output
+            if is_down, do: h, else: h-32
+        end
+    end
 end
